@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+    <head>
+        <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+      <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+     <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
+     <script src="{{url_for('static',filename='assets/js/leaflet.rotatedMarker.js')}}"></script>
+     <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
+     <script src="{{url_for('static',filename='assets/js/marauder.js')}}"></script>
+<link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
+     <style>
+        #map {
+            width: 100%;
+            height: 500px;
+        }
+     </style>
+    </head>
+    <body>
+        <div id="map"></div>
+        <script>
+            L.mapbox.accessToken = 'pk.eyJ1IjoibnlpbnlpbnlhbmxpbiIsImEiOiJjaXpucW8wenkwMnp0MndrN281eDZsdnE3In0.7z5t1MAr9PDHRhABhC9_9A';
+            var map = L.map('map').setView([51.505, -0.09], 13);
+            L.tileLayer(
+                'https://api.mapbox.com/styles/v1/nyinyinyanlin/clh1swbsy00m401que8jq82p3/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
+                    tileSize: 512,
+                    zoomOffset: -1,
+                    attribution: '© <a href="https://www.mapbox.com/contribute/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+
+            map.locate({watch: true, enableHighAccuracy: true, maximumAge: 5000, setView: true, maxZoom: 18});
+            let lIcon = L.icon({
+                iconUrl: '{{url_for("static",filename="assets/imgs/left-shoe.png")}}',
+                shadowUrl: '{{url_for("static",filename="assets/imgs/left-shoe.png")}}',
+                
+                iconSize:     [5, 12.5], // size of the icon
+                shadowSize:   [0, 0], // size of the shadow
+                iconAnchor:   [10, 6.25], // point of the icon which will correspond to marker's location
+                shadowAnchor: [0, 0],  // the same for the shadow
+                popupAnchor:  [2.5, 12.5] // point from which the popup should open relative to the iconAnchor
+            });
+            let rIcon = L.icon({
+                iconUrl: '{{url_for("static",filename="assets/imgs/right-shoe.png")}}',
+                shadowUrl: '{{url_for("static",filename="assets/imgs/right-shoe.png")}}',
+                        
+                iconSize:     [5, 12.5], // size of the icon
+                shadowSize:   [0, 0], // size of the shadow
+                iconAnchor:   [0, 6.25], // point of the icon which will correspond to marker's location
+                shadowAnchor: [0, 0],  // the same for the shadow
+                popupAnchor:  [2.5, 12.5] // point from which the popup should open relative to the iconAnchor
+            });
+            var user = new Marauder("User",lIcon,rIcon);
+            function onLocationFound(e) {
+                user.updatePos(map,e.latlng);
+            }
+            
+            map.on('locationfound', onLocationFound);
+            function onLocationError(e) {
+                alert(e.message);
+            }
+            
+            // map.on('locationerror', onLocationError);
+        </script>
+    </body>
+</html>
