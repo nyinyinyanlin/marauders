@@ -7,6 +7,7 @@
       <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
      crossorigin=""></script>
+     <script src='https://unpkg.com/leaflet.marker.slideto@0.2.0/Leaflet.Marker.SlideTo.js'></script>
      <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
      <script src="{{url_for('static',filename='assets/js/leaflet.rotatedMarker.js')}}"></script>
      <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
@@ -55,7 +56,13 @@
                 shadowAnchor: [0, 0],  // the same for the shadow
                 popupAnchor:  [2.5, 12.5] // point from which the popup should open relative to the iconAnchor
             });
-            var user = new Marauder("User",lIcon,rIcon);
+            var scrollIcon = L.divIcon({
+                className: 'scroll-icon',
+                html: '<img src="{{url_for("static",filename="assets/imgs/scroll.svg")}}"/>'
+                iconSize: [20,50],
+                iconAnchor: [20,50]
+                });
+            var user = new Marauder("User",lIcon,rIcon,scrollIcon);
             function onLocationFound(e) {
                 user.updatePos(map,e.latlng);
             }
