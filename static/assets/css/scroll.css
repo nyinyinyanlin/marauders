@@ -1,5 +1,5 @@
 .scroll {
-    animation-duration: 5s;
+    animation-duration: 10s;
     animation-timing-function: ease-in-out;
     animation-name: scroll;
     animation-iteration-count: infinite;
