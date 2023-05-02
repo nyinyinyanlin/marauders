@@ -58,9 +58,9 @@
             });
             var scrollIcon = L.divIcon({
                 className: 'scroll-icon',
-                html: '<img style="width:100px;height:auto;opacity:0.5" src="{{url_for("static",filename="assets/imgs/scroll.svg")}}"/>',
-                iconSize: [10,25],
-                iconAnchor: [-5,-25]
+                html: '<img style="width:100px;height:100;opacity:0.5" src="{{url_for("static",filename="assets/imgs/scroll.svg")}}"/>',
+                iconSize: [100,100],
+                iconAnchor: [-50,-50]
                 });
             var user = new Marauder("User",lIcon,rIcon,scrollIcon);
             function onLocationFound(e) {
