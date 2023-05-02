@@ -1,4 +1,4 @@
-function Marauder(name,lShoe,rShoe) {
+function Marauder(name,lShoe,rShoe,scroll) {
     const LEFT = 0;
     const RIGHT = 1;
     const BOTH = 2;
@@ -16,6 +16,8 @@ function Marauder(name,lShoe,rShoe) {
     this.speed = 0;
     this.status = STAND;
     this.lastDistance = 0;
+    this.scrollMarker = null;
+    this.scroll = scroll
 
     this.fadeIn = function(map,marker,duration) {
         // Set the initial opacity of the marker to 0
@@ -86,7 +88,11 @@ function Marauder(name,lShoe,rShoe) {
             this.fadeOut(map,this.fadeIn(map,L.marker(this.curPos, {icon: this.leftShoeIcon,rotationAngle: this.dir}),500));
             this.fadeOut(map,this.fadeIn(map,L.marker(this.curPos, {icon: this.rightShoeIcon,rotationAngle: this.dir}),500));
             this.curFoot = BOTH;          
+            if (this.scrollMarker == null) {
+                this.scrollMarker = this.fadeIn(map,L.marker(this.curPos, {icon: this.scroll}),1000);
+            }
         } else if (this.status == WALK || this.status == RUN) {
+            this.scrollMarker.slideTo([this.curPos.lat,this.curPos.lng],2000);
             let distance = this.lastDistance;
             let turfLine = turf.lineString([[this.lastPos.lng, this.lastPos.lat],[this.curPos.lng, this.curPos.lat]])
             for (let i = 0; i < distance/2; i++) {
