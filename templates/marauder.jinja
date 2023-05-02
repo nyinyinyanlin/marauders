@@ -71,7 +71,13 @@
             var user = new Marauder("User",lIcon,rIcon,scrollIcon);
             function onLocationFound(e) {
                 user.updatePos(map,e.latlng);
-                document.getElementById("log").innerHTML = e.latlng.lat + "" + e.latlng.lng;
+                document.getElementById("log").innerHTML = "lat: " + e.latlng.lat 
+                + "; lng: " + e.latlng.lng 
+                + "; speed: " + e.speed
+                + "; altitude: " + e.altitude
+                + "; heading: " + e.heading
+                + "; speed: " + e.speed
+                + "; timestamp: " + e.timestamp;
             }
             
             map.on('locationfound', onLocationFound);
