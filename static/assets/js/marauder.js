@@ -2,6 +2,9 @@ function Marauder(name,lShoe,rShoe) {
     const LEFT = 0;
     const RIGHT = 1;
     const BOTH = 2;
+    const STAND = 0;
+    const WALK = 1;
+    const RUN = 2;
     this.name = name;
     this.lastUpdate = null;
     this.lastPos = null;
@@ -10,6 +13,9 @@ function Marauder(name,lShoe,rShoe) {
     this.curFoot = BOTH;
     this.leftShoeIcon = lShoe;
     this.rightShoeIcon = rShoe;
+    this.speed = 0;
+    this.status = STAND;
+    this.lastDistance = 0;
 
     this.fadeIn = function(map,marker,duration) {
         // Set the initial opacity of the marker to 0
@@ -41,32 +47,51 @@ function Marauder(name,lShoe,rShoe) {
     }
 
     this.updatePos = function(map,latLng) {
-        this.lastUpdate = Date.now();
+        let curTime = Date.now();
         if (this.lastPos == null) {
             this.lastPos = this.curPos = latLng;
+            this.status = STAND;
         } else {
-            this.lastPos = this.curPos;
-            this.curPos = latLng;
-            let heading = turf.bearing(
-                turf.point([this.lastPos.lng, this.lastPos.lat]),
-                turf.point([this.curPos.lng, this.curPos.lat])
-            );
-            this.dir = (heading + 360) % 360;
+            let distance = this.lastPos.distanceTo(this.curPos);
+            if (distance<=1.5) {
+                console.log("Probably standing still");
+                this.speed = 0;
+                this.status = STAND;
+            }
+            if (distance>=1.5) {
+                this.lastPos = this.curPos;
+                this.curPos = latLng;
+                let heading = turf.bearing(
+                    turf.point([this.lastPos.lng, this.lastPos.lat]),
+                    turf.point([this.curPos.lng, this.curPos.lat])
+                );
+                this.dir = (heading + 360) % 360;
+                this.speed = ((distance * 1000)/ ((1000 * 60)(curTime-this.lastUpdate))); // Km/h
+                if (this.speed <= 6) {
+                    this.status = WALK;
+                    console.log("Walking at ",this.speed,"Km/h");
+                } else if (this.speed > 6) {
+                    this.status = RUN;
+                    console.log("Running at ",this.speed,"Km/h");
+                }
+            }
+            this.lastDistance = distance;
+            this.lastUpdate = curTime;
         }
         this.renderWalk(map);
     }
 
     this.renderWalk = function(map) {
-        if (this.lastPos == this.curPos) {
+        if (this.status == STAND) {
             this.fadeOut(map,this.fadeIn(map,L.marker(this.curPos, {icon: this.leftShoeIcon,rotationAngle: this.dir}),500));
-            this.fadeOut(map,this.fadeIn(map,L.marker(this.curPost, {icon: this.rightShoeIcon,rotationAngle: this.dir}),500));
-            this.curFoot = BOTH;            
-        } else if (this.lastPos.distanceTo(this.curPos)>=2) {
-            let distance = this.lastPos.distanceTo(this.curPos);
+            this.fadeOut(map,this.fadeIn(map,L.marker(this.curPos, {icon: this.rightShoeIcon,rotationAngle: this.dir}),500));
+            this.curFoot = BOTH;          
+        } else if (this.status == WALK || this.status == RUN) {
+            let distance = this.lastDistance;
             let turfLine = turf.lineString([[this.lastPos.lng, this.lastPos.lat],[this.curPos.lng, this.curPos.lat]])
             for (let i = 0; i < distance/2; i++) {
                 // Turf Along takes in kilometers as default unit
-                let point = turf.along(turfLine, i*0.001); 
+                let point = turf.along(turfLine, i*0.002); 
                 let icon;
                 if (this.curFoot == LEFT) {
                     icon = this.rightShoeIcon;
@@ -77,10 +102,6 @@ function Marauder(name,lShoe,rShoe) {
                 }
                 this.fadeOut(map,this.fadeIn(map,L.marker(L.latLng(point.geometry.coordinates[1],point.geometry.coordinates[0]), {icon: icon,rotationAngle: this.dir}),(i*500)));
             }
-        } else {
-            this.fadeOut(map,L.marker(this.curPos, {icon: this.leftShoeIcon,rotationAngle: this.dir}).addTo(map));
-            this.fadeOut(map,L.marker(this.curPost, {icon: this.rightShoeIcon,rotationAngle: this.dir}).addTo(map));
-            this.curFoot = BOTH;
         }
     }
 }
