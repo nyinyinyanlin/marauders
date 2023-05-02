@@ -20,12 +20,17 @@
         }
         #map {
             width: 100vw;
-            height: 100vh;
+            height: 80vh;
+        }
+        #log {
+            width: 100vw;
+            height: 20vh;
         }
      </style>
     </head>
     <body>
         <div id="map"></div>
+        <textarea id="log"></textarea>
         <script>
             L.mapbox.accessToken = 'pk.eyJ1IjoibnlpbnlpbnlhbmxpbiIsImEiOiJjaXpucW8wenkwMnp0MndrN281eDZsdnE3In0.7z5t1MAr9PDHRhABhC9_9A';
             var map = L.map('map').setView([51.9689529,7.5959884], 20);
@@ -66,6 +71,7 @@
             var user = new Marauder("User",lIcon,rIcon,scrollIcon);
             function onLocationFound(e) {
                 user.updatePos(map,e.latlng);
+                document.getElementById("log").innerHTML = e.latlng.lat + "" + e.latlng.lng;
             }
             
             map.on('locationfound', onLocationFound);
