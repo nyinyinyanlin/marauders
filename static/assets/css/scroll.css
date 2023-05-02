@@ -8,8 +8,8 @@
 
 @keyframes scroll {
     from {
-      margin-top: 20px;
-      margin-left: 20px;
+      margin-top:  10px;
+      margin-left: 5px;
     }
 
     25% {
@@ -17,7 +17,7 @@
     }
 
     50% {
-        margin-left: 20px;
+        margin-left: 5px;
     }
 
     75% {
@@ -25,7 +25,7 @@
     }
   
     to {
-      margin-top: -20px;
-      margin-left: -20px;
+      margin-top: -10px;
+      margin-left: 5px;
     } 
 }
