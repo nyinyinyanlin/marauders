@@ -1,0 +1,17 @@
+.scroll {
+    animation-duration: 5s;
+    animation-timing-function: ease-in-out;
+    animation-name: scroll;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes scroll {
+    from {
+      margin-top: 20px;
+    }
+  
+    to {
+      margin-top: -20px;
+    } 
+}

@@ -12,6 +12,7 @@
      <script src="{{url_for('static',filename='assets/js/leaflet.rotatedMarker.js')}}"></script>
      <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
      <script src="{{url_for('static',filename='assets/js/marauder.js')}}"></script>
+     <link rel="stylesheet" href="{{url_for('static',filename='assets/css/scroll.css')}}" />
 <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
      <style>
         html, body {
@@ -58,7 +59,7 @@
             });
             var scrollIcon = L.divIcon({
                 className: 'scroll-icon',
-                html: '<img style="width:100px;height:100;opacity:0.5" src="{{url_for("static",filename="assets/imgs/scroll.svg")}}"/>',
+                html: '<img class="scroll" style="width:100px;height:100;opacity:0.5" src="{{url_for("static",filename="assets/imgs/scroll.svg")}}"/>',
                 iconSize: [100,100],
                 iconAnchor: [50,100]
                 });
