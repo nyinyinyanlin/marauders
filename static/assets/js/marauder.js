@@ -61,7 +61,7 @@ function Marauder(name,lShoe,rShoe,scroll) {
             console.log("Update Pos: STAND");
             logger("Update Pos: STAND");
         } else {
-            console.log(this.lastPos,latlng);
+            console.log(this.lastPos,latLng);
             let distance = this.lastPos.distanceTo(latLng);
             if (distance<=1.5) {
                 console.log(distance);
