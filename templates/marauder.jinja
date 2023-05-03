@@ -7,9 +7,9 @@
       <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
      crossorigin=""></script>
-    <!-- <script src="{{url_for('static',filename='assets/js/leaflet.rotatedMarker.js')}}"></script> -->
+          <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
+    <script src="{{url_for('static',filename='assets/js/leaflet.rotatedMarker.js')}}"></script>
     <script src="https://unpkg.com/leaflet.marker.slideto@0.2.0/Leaflet.Marker.SlideTo.js"></script>
-     <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
      <script src='https://unpkg.com/@turf/turf@6/turf.min.js'></script>
      <link rel="stylesheet" href="{{url_for('static',filename='assets/css/scroll.css')}}" />
 <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet' />
@@ -68,10 +68,6 @@
                 iconSize: [100,100],
                 iconAnchor: [50,100]
                 });
-            let m = L.marker([51.9689529,7.5959884],{icon:scrollIcon});
-            m.addTo(map);
-            console.log(m);
-            m.slideTo([52.5,8.7],{duration:10000});
             var user = new Marauder("User",lIcon,rIcon,scrollIcon);
             function onLocationFound(e) {
                 user.updatePos(map,e.latlng);
