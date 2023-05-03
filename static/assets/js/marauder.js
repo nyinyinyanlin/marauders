@@ -103,6 +103,7 @@ function Marauder(name,lShoe,rShoe,scroll) {
             this.curFoot = BOTH;          
             if (this.scrollMarker == null) {
                 this.scrollMarker = this.fadeIn(map,L.marker(this.curPos, {icon: this.scroll}),1000);
+                console.log(this.scrollMarker);
             }
         } else if (this.status == WALK || this.status == RUN) {
             this.scrollMarker.slideTo([this.curPos.lat,this.curPos.lng],2000);
