@@ -79,7 +79,7 @@ function Marauder(name,lShoe,rShoe,scroll) {
                     turf.point([this.curPos.lng, this.curPos.lat])
                 );
                 this.dir = (heading + 360) % 360;
-                this.speed = ((distance * 1000)/ ((1000 * 60)(curTime-this.lastUpdate))); // Km/h
+                this.speed = (distance * 1000) / (1000 * 60 *(curTime-this.lastUpdate)); // Km/h
                 if (this.speed <= 6) {
                     this.status = WALK;
                     console.log("Walking at ",this.speed,"Km/h");
