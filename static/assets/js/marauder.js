@@ -43,7 +43,7 @@ function Marauder(name,lShoe,rShoe,scroll) {
         // Set a timeout to fade out and remove the marker after the duration has passed
         setTimeout(function() {
             // Fade out the marker using a CSS transition
-            marker.getElement().style.transition = 'opacity ' + 4000 + 'ms ease';
+            marker.getElement().style.transition = 'opacity ' + 1000 + 'ms ease';
             marker.getElement().style.opacity = 0;
 
             // Remove the marker from the map after the animation has finished
@@ -107,7 +107,7 @@ function Marauder(name,lShoe,rShoe,scroll) {
             }
         } else if (this.status == WALK || this.status == RUN) {
             console.log(this.scrollMarker);
-            this.scrollMarker.slideTo([this.curPos.lat,this.curPos.lng],{duration:2000});
+            this.scrollMarker.slideTo([this.curPos.lat,this.curPos.lng],{duration:4000});
             let distance = this.lastDistance;
             let turfLine = turf.lineString([[this.lastPos.lng, this.lastPos.lat],[this.curPos.lng, this.curPos.lat]])
             for (let i = 0; i < distance/2; i++) {
