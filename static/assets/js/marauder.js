@@ -1,4 +1,5 @@
 function logger(textareaid,message) {
+    textareaid = "log";
     document.getElementById(textareaid).innerHTML = document.getElementById(textareaid).innerHTML + "\n\rLOGGER:\n\r" + message;
 }
 
