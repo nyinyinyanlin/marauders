@@ -106,6 +106,7 @@ function Marauder(name,lShoe,rShoe,scroll) {
                 console.log(this.scrollMarker);
             }
         } else if (this.status == WALK || this.status == RUN) {
+            console.log(this.scrollMarker);
             this.scrollMarker.slideTo([this.curPos.lat,this.curPos.lng],2000);
             let distance = this.lastDistance;
             let turfLine = turf.lineString([[this.lastPos.lng, this.lastPos.lat],[this.curPos.lng, this.curPos.lat]])
