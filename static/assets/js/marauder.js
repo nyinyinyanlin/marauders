@@ -1,4 +1,4 @@
-function logger(textareaid,message) {
+function logger(message) {
     textareaid = "log";
     document.getElementById(textareaid).innerHTML = document.getElementById(textareaid).innerHTML + "\n\rLOGGER:\n\r" + message;
 }
@@ -63,6 +63,8 @@ function Marauder(name,lShoe,rShoe,scroll) {
         } else {
             let distance = this.lastPos.distanceTo(this.curPos);
             if (distance<=1.5) {
+                console.log(distance);
+                logger(distance);
                 console.log("Probably standing still");
                 logger("Probably standing still");
                 this.speed = 0;
