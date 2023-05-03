@@ -34,7 +34,6 @@
         <script>
             L.mapbox.accessToken = 'pk.eyJ1IjoibnlpbnlpbnlhbmxpbiIsImEiOiJjaXpucW8wenkwMnp0MndrN281eDZsdnE3In0.7z5t1MAr9PDHRhABhC9_9A';
             var map = L.map('map').setView([51.9689529,7.5959884], 20);
-            console.log(L.Marker);
             L.tileLayer(
                 'https://api.mapbox.com/styles/v1/nyinyinyanlin/clh1swbsy00m401que8jq82p3/tiles/{z}/{x}/{y}?access_token=' + L.mapbox.accessToken, {
                     tileSize: 512,
@@ -69,6 +68,9 @@
                 iconSize: [100,100],
                 iconAnchor: [50,100]
                 });
+            let m = L.marker([51.9689529,7.5959884],{icon:scrollIcon}).addTo(map);
+            console.log(m);
+            m.slideTo([52.5,8.7],{duration:10000});
             var user = new Marauder("User",lIcon,rIcon,scrollIcon);
             function onLocationFound(e) {
                 user.updatePos(map,e.latlng);
