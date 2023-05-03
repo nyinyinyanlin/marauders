@@ -1,3 +1,7 @@
+function logger(textareaid,message) {
+    document.getElementById(textareaid).innerHTML = document.getElementById(textareaid).innerHTML + "\n\rLOGGER:\n\r" + message;
+}
+
 function Marauder(name,lShoe,rShoe,scroll) {
     const LEFT = 0;
     const RIGHT = 1;
@@ -53,10 +57,13 @@ function Marauder(name,lShoe,rShoe,scroll) {
         if (this.lastPos == null) {
             this.lastPos = this.curPos = latLng;
             this.status = STAND;
+            console.log("Update Pos: STAND");
+            logger("Update Pos: STAND");
         } else {
             let distance = this.lastPos.distanceTo(this.curPos);
             if (distance<=1.5) {
                 console.log("Probably standing still");
+                logger("Probably standing still");
                 this.speed = 0;
                 this.status = STAND;
             }
@@ -72,9 +79,11 @@ function Marauder(name,lShoe,rShoe,scroll) {
                 if (this.speed <= 6) {
                     this.status = WALK;
                     console.log("Walking at ",this.speed,"Km/h");
+                    logger("Walking at "+this.speed+"Km/h");
                 } else if (this.speed > 6) {
                     this.status = RUN;
                     console.log("Running at ",this.speed,"Km/h");
+                    logger("Running at "+this.speed+"Km/h");
                 }
             }
             this.lastDistance = distance;
