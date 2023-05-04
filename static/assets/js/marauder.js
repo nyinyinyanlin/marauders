@@ -112,7 +112,7 @@ function Marauder(name,lShoe,rShoe,scroll) {
             let turfLine = turf.lineString([[this.lastPos.lng, this.lastPos.lat],[this.curPos.lng, this.curPos.lat]])
             for (let i = 0; i < distance/2; i++) {
                 // Turf Along takes in kilometers as default unit
-                let point = turf.along(turfLine, i*0.01); 
+                let point = turf.along(turfLine, i*0.05); 
                 let icon;
                 if (this.curFoot == LEFT) {
                     icon = this.rightShoeIcon;
