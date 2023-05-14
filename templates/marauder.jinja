@@ -72,11 +72,14 @@
                 recognition.lang = 'en-US';
                 recognition.onresult = function(event) {
                     console.log(event.results);
-                    var command = event.results[0][0].transcript;
-                    document.getElementById("log").innerHTML = command;
-                    console.log(command);
+                    var command = event.results[0][0].transcript.toLowerCase();
+                    if (command == "mischief started") {
+                        $("#smokescreen").css("background-color","yellow");
+                    }
+                    else if (commad == "mischief managed") {
+                        $("#smokescreen").css("background-color","red");
+                    }
                 }
-
 
                 var th = false;
                 var thTimer;
@@ -102,11 +105,9 @@
                     }
                 })
                 function startListen() {
-                    $("#smokescreen").css("background-color","yellow");
                     recognition.start();
                 }
                 function stopListen() {
-                    $("#smokescreen").css("background-color","red");
                     recognition.stop();
                 }
                 L.mapbox.accessToken = 'pk.eyJ1IjoibnlpbnlpbnlhbmxpbiIsImEiOiJjaXpucW8wenkwMnp0MndrN281eDZsdnE3In0.7z5t1MAr9PDHRhABhC9_9A';
