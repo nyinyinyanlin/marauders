@@ -28,7 +28,7 @@
             width: 100vw;
             height: 80vh;
         }
-        #smoke-screen {
+        #smokescreen {
             position: absolute;
             left: 0;
             top: 0;
@@ -58,7 +58,7 @@
      </style>
     </head>
     <body>
-        <div id="smoke-screen"></div>
+        <div id="smokescreen"></div>
         <div id="map"></div>
         <textarea id="log"></textarea>
         <script src="{{url_for('static',filename='assets/js/marauder.js')}}"></script>
@@ -67,7 +67,8 @@
                 var th = false;
                 var thTimer;
                 var listening = false;
-                $("#smoke-screen").on("touchstart",function(e){
+                $("#smokescreen").on("touchstart",function(e){
+                    console.log("touchstart");
                     th = false;
                     thTimer = setTimeout(function(){
                         th = true;
@@ -75,6 +76,7 @@
                         startListen();
                     },3000);
                 }).on("touchend",function(e){
+                    console.log("touchend");
                     if (th) {
                         th = false;
                         if (listening) {
