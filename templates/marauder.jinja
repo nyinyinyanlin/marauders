@@ -18,6 +18,18 @@
             margin: 0;
         }
         #map {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 80vh;
+        }
+        #smoke-screen {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: red;
+            z-index: 9999;
             width: 100vw;
             height: 80vh;
         }
@@ -42,6 +54,7 @@
      </style>
     </head>
     <body>
+        <div id="smoke-screen"></div>
         <div id="map"></div>
         <textarea id="log"></textarea>
         <script src="{{url_for('static',filename='assets/js/marauder.js')}}"></script>
