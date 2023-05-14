@@ -73,10 +73,9 @@
                 recognition.onresult = function(event) {
                     console.log(event.results);
                     var command = event.results[0][0].transcript.toLowerCase();
-                    if (command == "mischief started") {
+                    if (command == "i solemnly swear that i'm up to no good") {
                         $("#smokescreen").css("background-color","yellow");
-                    }
-                    else if (command == "mischief managed") {
+                    } else if (command == "mischief managed") {
                         $("#smokescreen").css("background-color","red");
                     }
                 }
