@@ -158,8 +158,8 @@
                 recognition.onresult = function(event) {
                     console.log(event.results);
                     var command = event.results[0][0].transcript.toLowerCase();
-                    console.log(command)
-                    if (command == "i solemnly swear that i'm up to no good") {
+                    let c = "i solemnly swear that i'm up to no good";
+                    if (command == "apple") {
                         speechSynthesis.speak(new SpeechSynthesisUtterance("Messers Moony, Wormtail, Nyi, Padfoot and Prongs Purveyors of Aids to magical Mischief-Makers are proud to present THE MARAUDER'S MAP"));
                         map.locate({watch: true, enableHighAccuracy: true, maximumAge: 5000, setView: true, maxZoom: 20});
                         $("#smokescreen").css("opacity","0");
@@ -167,7 +167,6 @@
                         map.stopLocate();
                         $("#smokescreen").css("opacity","1");
                     } else if (command == "where am i") {
-                        console.log("Where am I?")
                         if (currentLocation !== null) {
                             var url = "https://nominatim.openstreetmap.org/reverse.php?" + "lat=" + currentLocation.lat + "&lon=" + currentLocation.lng + "&zoom=18&format=json";
                             var request = new XMLHttpRequest();
@@ -183,7 +182,6 @@
                             };
                             request.send();
                         } else {
-                            console.log("Cannot find location");
                             speechSynthesis.speak(new SpeechSynthesisUtterance("Who might know?"));
                         }
                     }
