@@ -175,7 +175,9 @@
                                 if (request.status >= 200 && request.status < 400) {
                                     var data = JSON.parse(request.responseText);
                                     console.log(data);
-                                    let place = "You are at " + data.address.amenity + ", " + data.address.road;
+                                    let amenity = (typeof data.address.amenity === 'undefined') ? " " : data.address.amenity + ", ";
+                                    let road = (typeof data.address.road === 'undefined') ? " " : data.address.road;
+                                    let place = "You are at " + amenity + road;
                                     speechSynthesis.speak(new SpeechSynthesisUtterance(place));
                                 } 
                             };
