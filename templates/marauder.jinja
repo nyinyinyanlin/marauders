@@ -37,7 +37,7 @@
             z-index: 9999;
             width: 100vw;
             height: 100vh;
-            transition: opacity 3s ease-in;
+            transition: opacity 6s ease-in;
         }
         #log {
             width: 100vw;
@@ -158,8 +158,8 @@
                 recognition.onresult = function(event) {
                     console.log(event.results);
                     var command = event.results[0][0].transcript.toLowerCase();
-                    let c = "i solemnly swear that i'm up to no good";
-                    if (command == "apple") {
+                    let magic_word = "i solemnly swear that i'm up to no good";
+                    if (command == magic_word) {
                         speechSynthesis.speak(new SpeechSynthesisUtterance("Messers Moony, Wormtail, Nyi, Padfoot and Prongs Purveyors of Aids to magical Mischief-Makers are proud to present THE MARAUDER'S MAP"));
                         map.locate({watch: true, enableHighAccuracy: true, maximumAge: 5000, setView: true, maxZoom: 20});
                         $("#smokescreen").css("opacity","0");
@@ -174,7 +174,6 @@
                             request.onload = function() {
                                 if (request.status >= 200 && request.status < 400) {
                                     var data = JSON.parse(request.responseText);
-                                    console.log(data);
                                     let amenity = (typeof data.address.amenity === 'undefined') ? " " : data.address.amenity + ", ";
                                     let road = (typeof data.address.road === 'undefined') ? " " : data.address.road;
                                     let place = "You are at " + amenity + road;
