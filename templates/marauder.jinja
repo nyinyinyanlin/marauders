@@ -165,7 +165,7 @@
                     } else if (command == "mischief managed") {
                         map.stopLocate();
                         $("#smokescreen").css("opacity","1");
-                    } else if (command == "where am i?") {
+                    } else if (command == "where am i") {
                         if (currentLocation !== null) {
                             var url = "https://nominatim.openstreetmap.org/reverse.php?" + "lat=" + currentLocation.lat + "&lon=" + currentLocation.lng + "&zoom=18&format=json";
                             var request = new XMLHttpRequest();
