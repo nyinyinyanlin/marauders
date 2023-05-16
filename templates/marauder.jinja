@@ -175,7 +175,6 @@
                                 if (request.status >= 200 && request.status < 400) {
                                     var data = JSON.parse(request.responseText);
                                     console.log(data);
-                                    document.getElementById("place").innerHTML = data.display_name;
                                     let place = "You are at " + data.display_name;
                                     speechSynthesis.speak(new SpeechSynthesisUtterance(place));
                                 } 
