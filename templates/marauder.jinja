@@ -155,6 +155,7 @@
                     console.log(event.results);
                     var command = event.results[0][0].transcript.toLowerCase();
                     if (command == "i solemnly swear that i'm up to no good") {
+                        speechSynthesis.speak(new SpeechSynthesisUtterance("Messers Moony, Wormtail, Nyi, Padfoot and Prongs Purveyors of Aids to magical Mischief-Makers are proud to present THE MARAUDER'S MAP"));
                         map.locate({watch: true, enableHighAccuracy: true, maximumAge: 5000, setView: true, maxZoom: 20});
                         $("#smokescreen").css("opacity","0");
                     } else if (command == "mischief managed") {
